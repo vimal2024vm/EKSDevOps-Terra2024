@@ -28,3 +28,21 @@ module "eks" {
 
     attach_cluster_primary_security_group = true
   }
+
+  eks_managed_node_groups = {
+    amc-cluster-wg = {
+      min_size     = 1
+      max_size     = 2
+      desired_size = 1
+
+      instance_types = ["t3.large"]
+      capacity_type  = "SPOT"
+
+      tags = {
+        ExtraTag = "helloworld"
+      }
+    }
+  }
+
+  tags = local.tags
+}
